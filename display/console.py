@@ -30,7 +30,7 @@ class Console:
         self.width = width
         self.height = height
 
-    def cprint(self, text: str, color: ConsoleColor, newline=True):
+    def cprint(self, text: str, color=ConsoleColor.WHITE, newline=True):
         # Clear the style
         print(colorama.Style.RESET_ALL, end='')
 
