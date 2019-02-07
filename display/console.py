@@ -26,11 +26,13 @@ class ConsoleColor(Enum):
     BRIGHT_CYAN = 21
 
 class Console:
+    """Class for printing to the command prompt"""
     def __init__(self, width: int, height: int):
         self.width = width
         self.height = height
 
     def cprint(self, text: str, color=ConsoleColor.WHITE, newline=True):
+        """Function for printing with colors"""
         # Clear the style
         print(colorama.Style.RESET_ALL, end='')
 
@@ -64,5 +66,6 @@ class Console:
             print(color_switch[color] + text, end='')
 
     def clear(self):
+        """Clears the console"""
         for i in range(self.height):
             print(colorama.Style.RESET_ALL)
