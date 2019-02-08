@@ -6,11 +6,14 @@ import PyConsole.display.console
 
 import getpass
 from socket import gethostname
+import os
+from win32com.client import GetObject
 
 class Terminal:
     """Class for managing all terminal operations"""
     # Terminal flags
     quit = False
+    closing_window = False
 
     cur_dir = ''
 
@@ -44,7 +47,15 @@ class Terminal:
         self.console.cprint(getpass.getuser() + '@' + gethostname() + '#' + Terminal.cur_dir + '$ ', color=PyConsole.display.console.ConsoleColor.BRIGHT_GREEN, newline=False)
         cinput = self.console.get_input('')
         if cinput:
-            self.commands[cinput[0]].execute(cinput[1:], self.console)
+            if cinput[0] in self.commands:
+                self.commands[cinput[0]].execute(cinput[1:], self.console)
+            else:
+                os.system(' '.join(cinput))
 
         if not Terminal.quit:
             self.update()
+        if Terminal.closing_window:
+            WMI = GetObject('winmgmts:')
+            processes = WMI.InstancesOf('Win32_Process')
+            for p in WMI.ExecQuery('select * from Win32_Process where Name="cmd.exe"'):
+                os.system('taskkill /pid ' + str(p.Properties_('ProcessId').Value))
