@@ -11,7 +11,7 @@ class CommandLs(PyConsole.core.command.Command):
     LS: List all files and folders in the current directory
 
     Options:
-    -l, --long: detailed list mode
+    -l: detailed list mode
     """
     def __init__(self):
         self.cstr = 'ls'
