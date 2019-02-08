@@ -16,11 +16,7 @@ class CommandExit(PyConsole.core.command.Command):
 
     def execute(self, args: list, console: PyConsole.display.console.Console):
         parsed_args = self._parse_options(args)
-        quiting = False
         for arg in parsed_args:
             if arg.cname == 'q':
-                quiting = True
+                PyConsole.core.terminal.Terminal.closing_window = True
         PyConsole.core.terminal.Terminal.quit = True
-        if quiting:
-            import os
-            os.system('exit')
