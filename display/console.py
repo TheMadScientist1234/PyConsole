@@ -1,6 +1,8 @@
 import colorama
 from enum import Enum
 
+import os
+
 # Colors that can be printed to the console
 class ConsoleColor(Enum):
     BLACK = 1
@@ -31,11 +33,12 @@ class Console:
         self.width = width
         self.height = height
 
+    def get_input(self, prompt: str)->list:
+        """Function for getting user input from the console"""
+        return input(prompt).split(' ')
+
     def cprint(self, text: str, color=ConsoleColor.WHITE, newline=True):
         """Function for printing with colors"""
-        # Clear the style
-        print(colorama.Style.RESET_ALL, end='')
-
         # Determine colorama style tags
         color_switch = {
             ConsoleColor.BLACK: colorama.Fore.BLACK,
@@ -64,8 +67,9 @@ class Console:
             print(color_switch[color] + text)
         else:
             print(color_switch[color] + text, end='')
+        # Clear the style
+        print(colorama.Style.RESET_ALL, end='')
 
     def clear(self):
         """Clears the console"""
-        for i in range(self.height):
-            print(colorama.Style.RESET_ALL)
+        os.system('cls')
