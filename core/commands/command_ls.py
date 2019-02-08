@@ -1,7 +1,10 @@
 import PyConsole.core.command
 import PyConsole.core.option
+import PyConsole.core.terminal
 
 import PyConsole.display.console
+
+import os
 
 class CommandLs(PyConsole.core.command.Command):
     """
@@ -14,8 +17,6 @@ class CommandLs(PyConsole.core.command.Command):
         self.cstr = 'ls'
 
     def execute(self, args: list, console: PyConsole.display.console.Console)->bool:
-        console.cprint('Doing thing...')
         parsed_args = self._parse_options(args)
-        for option in parsed_args:
-            if option.cname == 'l':
-                console.cprint('Long list')
+        for dir in os.listdir(PyConsole.core.terminal.Terminal.cur_dir):
+            console.cprint(dir)
