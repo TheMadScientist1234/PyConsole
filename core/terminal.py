@@ -1,5 +1,6 @@
 import PyConsole.core.command
 import PyConsole.core.commands.command_ls
+import PyConsole.core.commands.command_exit
 
 import PyConsole.display.console
 
@@ -22,7 +23,8 @@ class Terminal:
 
         # Commands
         self.commands = {
-            'ls': PyConsole.core.commands.command_ls.CommandLs()
+            'ls': PyConsole.core.commands.command_ls.CommandLs(),
+            'exit': PyConsole.core.commands.command_exit.CommandExit()
         }
 
         # Clear the Console
